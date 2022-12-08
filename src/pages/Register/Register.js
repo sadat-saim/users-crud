@@ -22,7 +22,7 @@ const Register = () => {
 
         axios
           .post(
-            "https://api.imgbb.com/1/upload?key=e0528bb0aa334f81aacf4da058c21839",
+            `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imageApiKey}`,
             payload
           )
           .then((response) => {
@@ -85,7 +85,7 @@ const Register = () => {
                 <input
                   type="file"
                   alt="upload an image"
-                  className="input input-bordered pt-2"
+                  className="file-input file-input-bordered w-full max-w-xs"
                   {...register("image", { required: true })}
                 />
               </div>

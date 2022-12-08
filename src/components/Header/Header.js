@@ -51,13 +51,13 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link className="justify-between">
+                  <Link to="/profile" className="justify-between">
                     Profile
                     <span className="badge">New</span>
                   </Link>
                 </li>
                 <li onClick={handleSignout}>
-                  <a>Logout</a>
+                  <Link>Logout</Link>
                 </li>
               </ul>
             </div>

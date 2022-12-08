@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase.init";
 import { useQuery } from "@tanstack/react-query";
 import Card from "../../components/Card/Card";
@@ -55,7 +55,7 @@ const Home = () => {
           </label>
         )}
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {users?.map((user) => (
           <Card key={user.id} user={user} refetch={refetch}></Card>
         ))}
