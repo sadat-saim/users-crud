@@ -5,6 +5,7 @@
 !["Firebase"](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 !["Tailwind"](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
+[Live Site](https://user-crud-fda32.web.app/)
 ### Technologies used
 - React
 - React Router Dom
