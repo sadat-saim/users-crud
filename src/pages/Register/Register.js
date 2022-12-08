@@ -1,13 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-
-// checks if an uppercase, lowercase, digit or #$!%*?& are used in the password. It also limits the length to be 4 minimum and maximum 96, the length of 😀🇮🇸🧑‍💻 emojis count as more than one character in the length. The u in the end, tells it to use UTF-8.
+import { AuthContext } from "../../context/AuthProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
+  const { signup, updateUserProfile, signout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleRegister = (data) => {
     console.log(data);
+    const { name, email, password, image } = data;
+
+    signup(email, password)
+      .then((result) => {
+        console.log(result.user);
+        let payload = new FormData();
+        payload.append("image", image[0]);
+
+        axios
+          .post(
+            "https://api.imgbb.com/1/upload?key=e0528bb0aa334f81aacf4da058c21839",
+            payload
+          )
+          .then((response) => {
+            console.log("response URL", response.data.data.image.url);
+            const obj = {
+              displayName: name,
+              photoURL: response.data.data.image.url,
+            };
+            updateUserProfile(obj)
+              .then(() => {
+                signout()
+                  .then(() => {
+                    toast.success("Account Created Successfully");
+                    toast("Please log in now");
+                    navigate("/login");
+                  })
+                  .catch((err) => toast.error(`${err.message}`));
+              })
+              .catch((err) => toast.error(`${err.message}`));
+          })
+          .catch((err) => {
+            toast.error(`${err.message}`);
+          });
+      })
+      .catch((err) => toast.error(`${err.message}`));
   };
 
   return (
@@ -72,12 +112,16 @@ const Register = () => {
                     required: true,
                   })}
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
+              <label className="label">
+                Already have an account?
+                <Link
+                  to="/login"
+                  className="label-text-alt text-base mr-auto ml-1 link link-hover"
+                >
+                  Login
+                </Link>
+              </label>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
                   Register

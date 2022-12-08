@@ -12,6 +12,9 @@ const Header = () => {
           <Link to="/register" className="btn btn-ghost list-none">
             Register
           </Link>
+          <Link to="/login" className="btn btn-ghost list-none">
+            Login
+          </Link>
 
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
