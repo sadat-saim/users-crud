@@ -46,7 +46,7 @@ const Home = () => {
   if (isLoading) return <Loading></Loading>;
 
   return (
-    <div>
+    <div className="mx-3 md:mx-auto">
       <div className="flex justify-between my-3">
         <h1 className="font-bold text-3xl mt-3 mb-6">All Users</h1>
         {user && (

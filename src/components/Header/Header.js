@@ -23,6 +23,9 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex-none gap-2">
+          <Link to="/assignment" className="btn btn-ghost list-none">
+            Assginment2
+          </Link>
           {!user && (
             <>
               <Link to="/register" className="btn btn-ghost list-none">

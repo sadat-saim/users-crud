@@ -1,3 +1,4 @@
+import Assignment from "../components/Assignment/Assignment";
 import Error from "../pages/Error/Error";
 import Login from "../pages/Login/Login";
 import Profile from "../pages/Profile/Profile";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile></Profile>,
+      },
+      {
+        path: "/assignment",
+        element: <Assignment></Assignment>,
       },
     ],
   },
