@@ -18,8 +18,8 @@ const Header = () => {
     <div>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
-            Manage Users
+          <Link to="/" className="font-semibold cursor-pointer text-xl">
+            UsersDB
           </Link>
         </div>
         <div className="flex-none gap-2">
@@ -38,7 +38,7 @@ const Header = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src={user?.photoURL} />
+                  <img src={user?.photoURL} alt="user" />
                 </div>
               </label>
               <ul
@@ -46,18 +46,15 @@ const Header = () => {
                 className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <a className="justify-between uppercase font-semibold">
+                  <Link className="justify-between uppercase font-semibold">
                     {user?.displayName}
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="justify-between">
+                  <Link className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
-                </li>
-                <li>
-                  <a>Settings</a>
+                  </Link>
                 </li>
                 <li onClick={handleSignout}>
                   <a>Logout</a>

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebase.init";
 import { useQuery } from "@tanstack/react-query";
 import Card from "../../components/Card/Card";
 import Loading from "../../components/Loading/Loading";
-import { async } from "@firebase/util";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Home = () => {
+  const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const usersCollection = collection(db, "users");
   const {
@@ -48,13 +49,15 @@ const Home = () => {
     <div>
       <div className="flex justify-between my-3">
         <h1 className="font-bold text-3xl mt-3 mb-6">All Users</h1>
-        <label htmlFor="my-modal-6" className="btn">
-          Add User
-        </label>
+        {user && (
+          <label htmlFor="my-modal-6" className="btn">
+            Add User
+          </label>
+        )}
       </div>
       <div className="grid grid-cols-3 gap-3">
         {users?.map((user) => (
-          <Card key={user.id} user={user}></Card>
+          <Card key={user.id} user={user} refetch={refetch}></Card>
         ))}
       </div>
 
