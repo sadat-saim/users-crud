@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../context/AuthProvider";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { register, handleSubmit } = useForm();
+  const { signin } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogin = (data) => {
+    console.log(data);
+    const { email, password } = data;
+    signin(email, password)
+      .then((res) => {
+        console.log(res.user);
+        toast.success("Logged in successfully");
+        navigate("/");
+      })
+      .catch((err) => toast.error(`${err.message}`));
+  };
+
   return (
     <div>
       <div className="hero h-[60vh]">
@@ -13,7 +33,10 @@ const Login = () => {
               et a id nisi.
             </p>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <form
+            onSubmit={handleSubmit(handleLogin)}
+            className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+          >
             <div className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -23,6 +46,7 @@ const Login = () => {
                   type="text"
                   placeholder="email"
                   className="input input-bordered"
+                  {...register("email", { required: true })}
                 />
               </div>
               <div className="form-control">
@@ -30,21 +54,28 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
+                  {...register("password", { required: true })}
                   placeholder="password"
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
+                  Don't have an account?
+                  <Link
+                    to="/register"
+                    className="label-text-alt text-base mr-auto ml-1 link link-hover"
+                  >
+                    Register
+                  </Link>
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button type="submit" className="btn btn-primary">
+                  Login
+                </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

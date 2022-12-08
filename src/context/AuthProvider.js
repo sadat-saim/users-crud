@@ -18,15 +18,15 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (user) {
-        setUser(user);
+      if (currentUser) {
+        setUser(currentUser);
       } else {
         setUser(null);
       }
       setIsLoading(false);
     });
     return () => unsubscribe();
-  }, [auth]);
+  }, []);
 
   const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -43,6 +43,7 @@ const AuthProvider = ({ children }) => {
 
   const values = {
     isLoading,
+    user,
     signup,
     updateUserProfile,
     signout,
